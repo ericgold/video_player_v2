@@ -8,19 +8,28 @@
 </head>
 <body>
 	<div class="container">
-		<video controls>
-			<source src="video/video.mp4" type="video/mp4">
-			<source src="video/video.ogg" type="video/ogg">
-		</video>
+			<video>
+				<source src="video/video.mp4" type="video/mp4">
+				<source src="video/video.ogg" type="video/ogg">
+				
+				
+			</video>
+			<ul id="video-controls" class="controls">
+				<li class="progress"> 
+					<progress id="progress" value="0" min="0">
+						<span id="progress-bar"></span>
+					</progress>
+				</li>
+				<li><button id="playpause" type="button"></button></li>
+				
+				<li><button id="volume" type="button"></button></li>
+				<li><button id="fullscreen" type="button"></button></li>
+			</ul>
+			
+		
 		<div id="captions">
 			<p>
-				Now that we've looked at the architecture of the internet, let's see how you might connect your personal devices to the internet inside your house.
-			</p>
-			<p>
-				Well there are many ways to connect to the internet, and most often people connect wirelessly.
-			</p>
-			<p>
-				Let's look at an example of how you can connect to the internet.
+				Now that we've looked at the architecture of the internet, let's see how you might connect your personal devices to the internet inside your house. Well there are many ways to connect to the internet, and most often people connect wirelessly. Let's look at an example of how you can connect to the internet.
 			</p>
 			<p>
 				If you live in a city or a town, you probably have a coaxial cable for cable Internet, or a phone line if you have DSL, running to the outside of your house, that connects you to the Internet Service Provider, or ISP.
@@ -30,11 +39,10 @@
 			</p>
 			<p>
 				Whether a wire comes straight from the ISP hookup outside your house, or it travels over radio waves from your roof, the first stop a wire will make once inside your house, is at your modem.
-			</p>
-			<p>
 				A modem is what connects the internet to your network at home. A few common residential modems are DSL or
 			</p>
 		</div>
-	</div>	
+	</div>
+	<script type="text/javascript" href="scripts/app.js"></script>	
 </body>
 </html>

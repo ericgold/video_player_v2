@@ -5,6 +5,15 @@
 	align-items: center;
 }
 
+.controls {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	list-style: none;
+	z-index: 10;
+}
+
 video,
 #captions {
 	width: 100%;
@@ -12,5 +21,10 @@ video,
 	max-height: 506px;
 }
 
-
+#playpause {
+	width: 22px;
+	height: 26px;
+	background: url("../icons/play-icon.png");
+	
+}
 
