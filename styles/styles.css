@@ -33,6 +33,20 @@ video,
 	margin-bottom: 4px;
 }
 
+#progress[value] {
+	-webkit-appearance: none;
+	appearance: none;
+	border: none;
+}
+
+#progress-bar {
+	height: 2px;
+}
+
+progress[value]::-webkit-progress-value {
+	background-color: orange;
+}
+
 #playpause {
 	width: 22px;
 	height: 26px;

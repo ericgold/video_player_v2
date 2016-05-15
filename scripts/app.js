@@ -59,6 +59,13 @@ playpause.addEventListener("click", playPause);
 volume.addEventListener("click", muteVideo);
 
 
+// *** PROGRESS BAR *** //
+
+video.addEventListener('timeupdate', function() {
+	var percent = Math.floor((100 / video.duration) * video.currentTime);
+	progress.value = percent;
+	progress.getElementsById('progress-bar').innerHTML = percent; 
+	}, false);
 
 
 
