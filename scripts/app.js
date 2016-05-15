@@ -1,7 +1,7 @@
 var video = document.getElementById('video');
 var videoControls = document.getElementById('video-controls');
-
 var progress = document.getElementById('progress');
+var progressbar = document.getElementById('progress-bar');
 var playpause = document.getElementById('playpause');
 var volume = document.getElementById('volume');
 var fullscreen = document.getElementById('fullscreen');
@@ -64,10 +64,40 @@ volume.addEventListener("click", muteVideo);
 video.addEventListener('timeupdate', function() {
 	var percent = Math.floor((100 / video.duration) * video.currentTime);
 	progress.value = percent;
-	progress.getElementsById('progress-bar').innerHTML = percent; 
+	progressbar.innerHTML = percent;
+	timer.innerHTML = progress.value;
 	}, false);
 
+// *** TIMER ***
+// get progress.value
+// convert seconds to MM:SS format
+// display in #timer
+// #timer should also display video.duration in MM:SS format
 
+// *** PROGRESS BAR CLICK ***
+
+function goToTime() {
+	//gets time of point clicked
+	//advances video to that time in the video
+}
+
+progress.addEventListener("click", goToTime);
+
+// *** FULLSCREEN BUTTON ***
+
+function fullScreen() {
+	if (video.requestFullscreen) {
+		video.requestFullscreen();
+	} else if (video.msRequestFullscreen) {
+		video.msRequestFullscreen();
+	} else if (video.mozRequestFullScreen) {
+		video.mozRequestFullScreen();
+	} else if (video.webkitRequestFullscreen) {
+		video.webkitRequestFullscreen();
+	}
+}
+
+fullscreen.addEventListener("click", fullScreen);
 
 
 

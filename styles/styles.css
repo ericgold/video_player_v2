@@ -18,12 +18,18 @@
 
 }
 
-video,
+#video,
 #captions,
 #video-controls {
 	width: 100%;
 	max-width: 900px;
 	max-height: 506px;
+}
+
+/* needed to get full screen in webkit browsers rather than overlay */
+#video:-webkit-full-screen {
+	width: 100%;
+	height: 100%;
 }
 
 #progress {
@@ -52,8 +58,15 @@ progress[value]::-webkit-progress-value {
 	height: 26px;
 	background: url("../icons/play-icon.png");
 	border: none;
-	margin-right: auto;
 	outline: none;
+}
+
+#timer {
+	height: 26px;
+	margin-right: auto;
+	font-family: Arial;
+	font-size: 0.5em;
+	color: #fff;
 }
 
 #volume {
