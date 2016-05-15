@@ -1,37 +1,37 @@
-//checks to see if the browser supports the <video> element
+var video = document.getElementById('video');
+var videoControls = document.getElementById('video-controls');
 
-//var supportsVideo = !!document.createElement('video').canPlayType;
+var playpause = document.getElementById('playpause');
+var volume = document.getElementById('volume');
+var progress = document.getElementById('progress');
+var progressBar = document.getElementById('progress-bar');
+var fullscreen = document.getElementById('fullscreen');
 
-//if (supportsVideo) {
+function playPause() {
+	if (video.paused) {
+		console.log("play");
+		video.play();
+	} else {
+		console.log("pause");
+		video.pause();
+	}
+}
 
-//}
+function muteVideo() {
+	console.log("mute");
+	video.muted();
+}
+
+playpause.addEventListener("click", playPause);
+
+volume.addEventListener("click", muteVideo);
 
 
 
-	//var videoContainer = document.getElementById('videoContainer'); not in markup yet
-	var video = document.getElementById('video');
-	var videoControls = document.getElementById('video-controls');
 
-	//hide default controls
-	video.controls = false;
 
-	//display custom controls
-	videoControls.style.display = 'block';
 
-	var playpause = document.getElementById('playpause');
-	var volume = document.getElementById('volume');
-	var progress = document.getElementById('progress');
-	var progressBar = document.getElementById('progress-bar');
-	var fullscreen = document.getElementById('fullscreen');
 
-	playpause.addEventListener('click', function(e) {
-		if (video.paused || video.ended) video.play();
-		else video.pause();
-	});
-
-	mute.addEventListener('click', function(e) {
-		video.muted = !video.muted;
-	});
 
 
 

@@ -8,23 +8,51 @@
 .controls {
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	align-items: center;
 	list-style: none;
 	z-index: 10;
+	background-color: black;
+	color: orange;
+
 }
 
 video,
-#captions {
+#captions,
+#video-controls {
 	width: 100%;
 	max-width: 900px;
 	max-height: 506px;
+}
+
+#progress {
+	width:100%;
+	flex-grow: 1;
+	height: 0.1em;
+	margin: 0 0.5em;
+	opacity: 0.1;
+	color: orange;
 }
 
 #playpause {
 	width: 22px;
 	height: 26px;
 	background: url("../icons/play-icon.png");
-	
+	border: none;
+	margin-right: auto;
 }
 
+#volume {
+	width: 22px;
+	height: 22px;
+	background: url("../icons/volume-on-icon.png");
+	border: none;
+}
+
+#fullscreen {
+	width: 22px;
+	height: 22px;
+	background: url("../icons/fullscreen-icon.png");
+	border: none;
+}
