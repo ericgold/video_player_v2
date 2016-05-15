@@ -3,18 +3,18 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	box-sizing: border-box;
 }
 
-.controls {
+#video-controls {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
 	list-style: none;
-	z-index: 10;
 	background-color: black;
-	color: orange;
+	padding: 0.5em 1em;
 
 }
 
@@ -27,12 +27,10 @@ video,
 }
 
 #progress {
-	width:100%;
+	width: 100%;
 	flex-grow: 1;
-	height: 0.1em;
-	margin: 0 0.5em;
-	opacity: 0.1;
-	color: orange;
+	height: 4px;
+	margin-bottom: 4px;
 }
 
 #playpause {
@@ -41,6 +39,7 @@ video,
 	background: url("../icons/play-icon.png");
 	border: none;
 	margin-right: auto;
+	outline: none;
 }
 
 #volume {
@@ -48,6 +47,8 @@ video,
 	height: 22px;
 	background: url("../icons/volume-on-icon.png");
 	border: none;
+	margin: 0 0.5em;
+	outline: none;
 }
 
 #fullscreen {
