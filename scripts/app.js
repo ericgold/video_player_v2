@@ -5,7 +5,8 @@ var progressbar = document.getElementById('progress-bar');
 var playpause = document.getElementById('playpause');
 var volume = document.getElementById('volume');
 var fullscreen = document.getElementById('fullscreen');
-
+var timer = document.getElementById('timer');
+var duration = document.getElementById('duration');
 
 // *** PLAYPAUSE BUTTON ***
 
@@ -91,7 +92,12 @@ function timerDisplay() {
 
 //event listener to run above functions when video time is updated
 video.addEventListener('timeupdate', function() {
-	timer.innerHTML = convertSecs(this.currentTime);
+	//timer.innerHTML = convertSecs(this.currentTime);
+	timer.innerHTML = this.currentTime;
+});
+
+video.addEventListener('canplay', function() {
+	duration.innerHTML = "/" + video.duration;
 });
 
 

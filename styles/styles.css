@@ -61,12 +61,16 @@ progress[value]::-webkit-progress-value {
 	outline: none;
 }
 
-#timer {
+#timer,
+#duration {
 	height: 26px;
-	margin-right: auto;
 	font-family: Arial;
 	font-size: 0.5em;
 	color: #fff;
+}
+
+#duration {
+	margin-right: auto;
 }
 
 #volume {
