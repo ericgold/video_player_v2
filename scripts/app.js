@@ -59,29 +59,56 @@ playpause.addEventListener("click", playPause);
 volume.addEventListener("click", muteVideo);
 
 
+
 // *** PROGRESS BAR *** //
 
 video.addEventListener('timeupdate', function() {
 	var percent = Math.floor((100 / video.duration) * video.currentTime);
 	progress.value = percent;
 	progressbar.innerHTML = percent;
-	timer.innerHTML = progress.value;
 	}, false);
 
+
+
 // *** TIMER ***
-// get progress.value
-// convert seconds to MM:SS format
-// display in #timer
-// #timer should also display video.duration in MM:SS format
+
+// get currentTime
+// convert to MM:SS format
+function convertSecs() {
+	//var minutes = this / 60;
+	//var seconds = this % 60;
+}
+
+//updates the counter
+function timerUpdate() {
+	var counter = minutes + ":" + seconds;
+}
+
+function timerDisplay() {
+	//displays counter in #timer, 
+	//followed by video.duration in same MM:SS format
+}
+
+//event listener to run above functions when video time is updated
+video.addEventListener('timeupdate', function() {
+	timer.innerHTML = convertSecs(this.currentTime);
+});
+
+
 
 // *** PROGRESS BAR CLICK ***
 
 function goToTime() {
+	console.log(progress.value);
 	//gets time of point clicked
-	//advances video to that time in the video
+	var clickPoint;
+	//advances video to that time in the 
+	//currentTime = clickPoint
 }
 
 progress.addEventListener("click", goToTime);
+
+
 
 // *** FULLSCREEN BUTTON ***
 
