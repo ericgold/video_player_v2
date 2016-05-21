@@ -7,15 +7,24 @@
 }
 
 #video-controls {
-	display: flex;
+	box-sizing: border-box;
+	display: none;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
 	list-style: none;
-	background-color: black;
 	padding: 0.5em 1em;
+	margin-top: -50px;
+	z-index: 10;
+}
 
+#controls-buttons {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
 }
 
 #video,
@@ -25,6 +34,8 @@
 	max-width: 900px;
 	max-height: 506px;
 }
+
+
 
 /* needed to get full screen in webkit browsers rather than overlay */
 #video:-webkit-full-screen {

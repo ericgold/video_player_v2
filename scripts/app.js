@@ -1,5 +1,6 @@
 var video = document.getElementById('video');
 var videoControls = document.getElementById('video-controls');
+//var controlsButtons = document.getElementById('controls-buttons');
 var progress = document.getElementById('progress');
 var progressbar = document.getElementById('progress-bar');
 var playpause = document.getElementById('playpause');
@@ -7,6 +8,18 @@ var volume = document.getElementById('volume');
 var fullscreen = document.getElementById('fullscreen');
 var timer = document.getElementById('timer');
 var duration = document.getElementById('duration');
+
+
+function showControls() {
+	videoControls.style.display = "flex";
+}
+
+function hideControls() {
+	videoControls.style.display = "none";
+}
+
+video.addEventListener("mouseover", showControls);
+video.addEventListener("mouseleave", hideControls);
 
 // *** PLAYPAUSE BUTTON ***
 
@@ -73,17 +86,26 @@ video.addEventListener('timeupdate', function() {
 
 // *** TIMER ***
 
-// get currentTime
+var i = setInterval(function() {
+	if(video.readyState > 0) {
+		var minutes = parseInt(video.duration / 60, 10);
+		var seconds = video.duration % 60;
+		timer.innerHTML = minutes + ":" + seconds;
+		clearInterval(i);
+	}
+}, 200);
+
+/* get currentTime
 // convert to MM:SS format
 function convertSecs() {
-	//var minutes = this / 60;
+	//Math.floor(this/ 60);
 	//var seconds = this % 60;
 }
 
-//updates the counter
-function timerUpdate() {
-	var counter = minutes + ":" + seconds;
-}
+//updates the counter NOT NEEDED?
+//function timerUpdate() {
+//	var counter = minutes + ":" + seconds;
+//}
 
 function timerDisplay() {
 	//displays counter in #timer, 
@@ -92,20 +114,26 @@ function timerDisplay() {
 
 //event listener to run above functions when video time is updated
 video.addEventListener('timeupdate', function() {
-	//timer.innerHTML = convertSecs(this.currentTime);
 	timer.innerHTML = this.currentTime;
+	//timer.innerHTML = this.currentTime;
+	//add code to highlight appropriate caption span here?
 });
 
 video.addEventListener('canplay', function() {
-	duration.innerHTML = "/" + video.duration;
+	duration.innerHTML = "/" + Math.floor(video.duration)  + ":";
 });
-
+*/
 
 
 // *** PROGRESS BAR CLICK ***
 
+function convertPercent() {
+	var progressPercent = Math.floor(this/100);
+
+}
+
 function goToTime() {
-	console.log(progress.value);
+	console.log(convertPercent(progress.value));
 	//gets time of point clicked
 	var clickPoint;
 	//advances video to that time in the 
@@ -114,6 +142,8 @@ function goToTime() {
 
 progress.addEventListener("click", goToTime);
 
+
+// *** HIGHLIGHTING CAPTIONS *** //
 
 
 // *** FULLSCREEN BUTTON ***
