@@ -9,10 +9,7 @@
 #video-controls {
 	box-sizing: border-box;
 	display: none;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	align-items: center;
+	flex-direction: column;
 	list-style: none;
 	padding: 0.5em 1em;
 	margin-top: -50px;
@@ -34,6 +31,14 @@
 	max-width: 900px;
 	max-height: 506px;
 }
+
+
+#video:hover + #video-controls,
+#video-controls:hover {
+	display: flex;
+}
+
+
 
 
 
@@ -70,17 +75,19 @@ progress[value]::-webkit-progress-value {
 	background: url("../icons/play-icon.png");
 	border: none;
 	outline: none;
+	margin: 0 0.5em 0 0;
 }
 
 #timer,
-#duration {
+#end-time {
 	height: 26px;
-	font-family: Arial;
-	font-size: 0.5em;
+	font-family: Arial, sans-serif;
+	font-size: 1em;
 	color: #fff;
+	align-self: center;
 }
 
-#duration {
+#end-time {
 	margin-right: auto;
 }
 
@@ -91,6 +98,7 @@ progress[value]::-webkit-progress-value {
 	border: none;
 	margin: 0 0.5em;
 	outline: none;
+
 }
 
 #fullscreen {

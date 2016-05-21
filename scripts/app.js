@@ -7,19 +7,9 @@ var playpause = document.getElementById('playpause');
 var volume = document.getElementById('volume');
 var fullscreen = document.getElementById('fullscreen');
 var timer = document.getElementById('timer');
-var duration = document.getElementById('duration');
+var endTime = document.getElementById('end-time');
 
 
-function showControls() {
-	videoControls.style.display = "flex";
-}
-
-function hideControls() {
-	videoControls.style.display = "none";
-}
-
-video.addEventListener("mouseover", showControls);
-video.addEventListener("mouseleave", hideControls);
 
 // *** PLAYPAUSE BUTTON ***
 
@@ -86,44 +76,27 @@ video.addEventListener('timeupdate', function() {
 
 // *** TIMER ***
 
+//function on 200 ms interval, run getMins and getSecs
+//and display in html element as MM:SS
+
 var i = setInterval(function() {
 	if(video.readyState > 0) {
-		var minutes = parseInt(video.duration / 60, 10);
-		var seconds = video.duration % 60;
+		var minutes = parseInt(video.currentTime / 60, 10);
+		var seconds = parseInt(video.currentTime % 60);
 		timer.innerHTML = minutes + ":" + seconds;
-		clearInterval(i);
+		//clearInterval(i);
 	}
 }, 200);
 
-/* get currentTime
-// convert to MM:SS format
-function convertSecs() {
-	//Math.floor(this/ 60);
-	//var seconds = this % 60;
-}
-
-//updates the counter NOT NEEDED?
-//function timerUpdate() {
-//	var counter = minutes + ":" + seconds;
-//}
-
-function timerDisplay() {
-	//displays counter in #timer, 
-	//followed by video.duration in same MM:SS format
-}
-
-//event listener to run above functions when video time is updated
-video.addEventListener('timeupdate', function() {
-	timer.innerHTML = this.currentTime;
-	//timer.innerHTML = this.currentTime;
-	//add code to highlight appropriate caption span here?
-});
+// *** VIDEO LENGTH DISPLAY *** //
 
 video.addEventListener('canplay', function() {
-	duration.innerHTML = "/" + Math.floor(video.duration)  + ":";
+	var totalMinutes = parseInt(video.duration / 60, 10);
+	var totalSeconds = parseInt(video.duration % 60);
+	endTime.innerHTML = "/" + totalMinutes + ":" + totalSeconds;
 });
-*/
 
+/*
 
 // *** PROGRESS BAR CLICK ***
 
@@ -145,6 +118,15 @@ progress.addEventListener("click", goToTime);
 
 // *** HIGHLIGHTING CAPTIONS *** //
 
+//constructor function to create object for each caption?
+//object for captions with id, start time, end time
+//event listener on spans in captions
+	//if currentTime is greater than starttime 
+	//and less than end time 
+	//caption gets class
+//class should change background color of the span
+
+*/
 
 // *** FULLSCREEN BUTTON ***
 
