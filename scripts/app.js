@@ -1,5 +1,5 @@
 var video = document.getElementById('video');
-var videoControls = document.getElementById('video-controls');
+//var videoControls = document.getElementById('video-controls');
 //var controlsButtons = document.getElementById('controls-buttons');
 var progress = document.getElementById('progress');
 var progressbar = document.getElementById('progress-bar');
@@ -70,14 +70,15 @@ video.addEventListener('timeupdate', function() {
 	var percent = Math.floor((100 / video.duration) * video.currentTime);
 	progress.value = percent;
 	progressbar.innerHTML = percent;
-	}, false);
+}, false);
 
 
 
 // *** TIMER ***
 
-//function on 200 ms interval, run getMins and getSecs
+//function on 200 ms interval, calculate mins and secs
 //and display in html element as MM:SS
+
 
 var i = setInterval(function() {
 	if(video.readyState > 0) {
@@ -88,12 +89,15 @@ var i = setInterval(function() {
 	}
 }, 200);
 
+
+
 // *** VIDEO LENGTH DISPLAY *** //
 
 video.addEventListener('canplay', function() {
 	var totalMinutes = parseInt(video.duration / 60, 10);
+	console.log(totalMinutes);
 	var totalSeconds = parseInt(video.duration % 60);
-	endTime.innerHTML = "/" + totalMinutes + ":" + totalSeconds;
+	endTime.innerHTML = "\/" + totalMinutes + ":" + totalSeconds;
 });
 
 /*
