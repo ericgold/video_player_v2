@@ -5,6 +5,7 @@ var progress = document.getElementById('progress');
 var progressbar = document.getElementById('progress-bar');
 var playpause = document.getElementById('playpause');
 var volume = document.getElementById('volume');
+var volumeslider = document.getElementById('volumeslider');
 var fullscreen = document.getElementById('fullscreen');
 var timer = document.getElementById('timer');
 var endTime = document.getElementById('end-time');
@@ -62,9 +63,15 @@ playpause.addEventListener("click", playPause);
 
 volume.addEventListener("click", muteVideo);
 
+// *** VOLUME SLIDER ***
 
+function setVolume() {
+	video.volume = volumeslider.value / 100;
+}
 
-// *** PROGRESS BAR *** //
+volumeslider.addEventListener('click', setVolume);
+
+// *** PROGRESS BAR *** 
 
 function progressPopulate() {
 	var videoTime = ((video.currentTime / video.duration) * 100);
@@ -116,25 +123,22 @@ function showLength() {
 
 video.addEventListener('canplay', showLength);
 
-/*
+
 
 // *** PROGRESS BAR CLICK ***
-
+/*
 function convertPercent() {
 	var progressPercent = Math.floor(this/100);
 
 }
 
 function goToTime() {
-	console.log(convertPercent(progress.value));
-	//gets time of point clicked
-	var clickPoint;
-	//advances video to that time in the 
-	//currentTime = clickPoint
+	var gothere = video.duration * (progressbar.value / 100);
+	video.currentTime = gothere;
 }
 
 progress.addEventListener("click", goToTime);
-
+*/
 
 // *** HIGHLIGHTING CAPTIONS *** //
 
@@ -146,7 +150,7 @@ progress.addEventListener("click", goToTime);
 	//caption gets class
 //class should change background color of the span
 
-*/
+
 
 // *** FULLSCREEN BUTTON ***
 
