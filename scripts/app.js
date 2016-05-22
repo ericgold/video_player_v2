@@ -83,9 +83,16 @@ video.addEventListener('playing', setInterval(progressPopulate, 100));
 //and display in html element as MM:SS
 
 function showTimer() {
-	var minutes = parseInt(video.currentTime / 60, 10);
-	var seconds = parseInt(video.currentTime % 60);
-	timer.innerHTML = minutes + ":" + seconds;
+	var playedMinutes = parseInt(video.currentTime / 60, 10);
+	var playedSeconds = parseInt(video.currentTime % 60);
+	//tests to add leading 0 to short times
+	if (playedMinutes < 10) {
+		playedMinutes = "0" + playedMinutes;
+	};
+	if (playedSeconds < 10) {
+		playedSeconds = "0" + playedSeconds;
+	};
+	timer.innerHTML = playedMinutes + ":" + playedSeconds;
 }
 
 video.addEventListener('canplay', setInterval(showTimer, 1000));
@@ -97,6 +104,13 @@ video.addEventListener('canplay', setInterval(showTimer, 1000));
 function showLength() {
 	var totalMinutes = parseInt(video.duration / 60, 10);
 	var totalSeconds = parseInt(video.duration % 60);
+	//tests to add leading 0 to short times
+	if (totalMinutes < 10) {
+		totalMinutes = "0" + totalMinutes;
+	};
+	if (totalSeconds < 10) {
+		totalSeconds = "0" + totalSeconds;
+	};
 	endTime.innerHTML = "\/" + totalMinutes + ":" + totalSeconds;
 }
 
