@@ -66,11 +66,14 @@ volume.addEventListener("click", muteVideo);
 
 // *** PROGRESS BAR *** //
 
-video.addEventListener('timeupdate', function() {
-	var percent = Math.floor((100 / video.duration) * video.currentTime);
-	progress.value = percent;
-	progressbar.innerHTML = percent;
-}, false);
+function progressPopulate() {
+	var videoTime = ((video.currentTime / video.duration) * 100);
+	progress.value = videoTime;
+	progressbar.innerHTML = videoTime;
+}
+
+video.addEventListener('playing', setInterval(progressPopulate, 100));
+
 
 
 
@@ -79,26 +82,25 @@ video.addEventListener('timeupdate', function() {
 //function on 200 ms interval, calculate mins and secs
 //and display in html element as MM:SS
 
+function showTimer() {
+	var minutes = parseInt(video.currentTime / 60, 10);
+	var seconds = parseInt(video.currentTime % 60);
+	timer.innerHTML = minutes + ":" + seconds;
+}
 
-var i = setInterval(function() {
-	if(video.readyState > 0) {
-		var minutes = parseInt(video.currentTime / 60, 10);
-		var seconds = parseInt(video.currentTime % 60);
-		timer.innerHTML = minutes + ":" + seconds;
-		//clearInterval(i);
-	}
-}, 200);
+video.addEventListener('canplay', setInterval(showTimer, 1000));
 
 
 
 // *** VIDEO LENGTH DISPLAY *** //
 
-video.addEventListener('canplay', function() {
+function showLength() {
 	var totalMinutes = parseInt(video.duration / 60, 10);
-	console.log(totalMinutes);
 	var totalSeconds = parseInt(video.duration % 60);
 	endTime.innerHTML = "\/" + totalMinutes + ":" + totalSeconds;
-});
+}
+
+video.addEventListener('canplay', showLength);
 
 /*
 
