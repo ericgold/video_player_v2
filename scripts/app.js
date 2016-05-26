@@ -10,6 +10,9 @@ var fullscreen = document.getElementById('fullscreen');
 var timer = document.getElementById('timer');
 var endTime = document.getElementById('end-time');
 
+var caption = document.getElementsByClassName('caption');
+
+
 
 
 // *** PLAYPAUSE BUTTON ***
@@ -125,33 +128,6 @@ video.addEventListener('canplay', showLength);
 
 
 
-// *** PROGRESS BAR CLICK ***
-/*
-function convertPercent() {
-	var progressPercent = Math.floor(this/100);
-
-}
-
-function goToTime() {
-	var gothere = video.duration * (progressbar.value / 100);
-	video.currentTime = gothere;
-}
-
-progress.addEventListener("click", goToTime);
-*/
-
-// *** HIGHLIGHTING CAPTIONS *** //
-
-//constructor function to create object for each caption?
-//object for captions with id, start time, end time
-//event listener on spans in captions
-	//if currentTime is greater than starttime 
-	//and less than end time 
-	//caption gets class
-//class should change background color of the span
-
-
-
 // *** FULLSCREEN BUTTON ***
 
 function fullScreen() {
@@ -168,6 +144,56 @@ function fullScreen() {
 
 fullscreen.addEventListener("click", fullScreen);
 
+
+// *** PROGRESS BAR CLICK ***
+/*
+function convertPercent() {
+	var progressPercent = Math.floor(this/100);
+
+}
+
+function goToTime() {
+	var gothere = video.duration * (progressbar.value / 100);
+	video.currentTime = gothere;
+}
+
+progress.addEventListener("click", goToTime);
+*/
+
+// *** HIGHLIGHTING CAPTIONS *** 
+function highlighter() {
+	var magicPoint = video.currentTime;
+	for (var i = 0; i < caption.length; i++) {
+		if (magicPoint >= caption[i].getAttribute('data-start')
+			&& magicPoint <= caption[i].getAttribute('data-end')) {
+			caption[i].classList.add("highlight");
+		} else if (magicPoint >= caption[i].getAttribute('data-end')
+			|| magicPoint <= caption[i].getAttribute('data-start')) {
+			caption[i].classList.remove("highlight");
+		}
+	}; 
+}
+
+video.addEventListener("playing", setInterval(highlighter, 1000));
+
+
+//event listener on spans in captions
+	//if currentTime is greater than starttime 
+	//and less than end time 
+	//caption gets class
+//class should change background color of the span
+
+
+// *** CAPTION CLICK NAVIGATION ***
+
+function captionJump() {
+	var startTime = this.getAttribute('data-start');
+	video.currentTime = startTime;
+}
+
+for (var i = 0; i < caption.length; i++) {
+	caption[i].addEventListener("click", captionJump);
+}
 
 
 

@@ -41,6 +41,15 @@
 	padding: 1em;
 }
 
+.caption:hover {
+	cursor: pointer;
+	color: orange;
+}
+
+.highlight {
+	color: orange;
+}
+
 
 
 /* needed to get full screen in webkit browsers rather than overlay */
