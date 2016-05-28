@@ -4,12 +4,13 @@ var video = document.getElementById('video');
 var progress = document.getElementById('progress');
 var progressbar = document.getElementById('progress-bar');
 var playpause = document.getElementById('playpause');
+var cc = document.getElementById('cc');
 var volume = document.getElementById('volume');
 var volumeslider = document.getElementById('volumeslider');
 var fullscreen = document.getElementById('fullscreen');
 var timer = document.getElementById('timer');
 var endTime = document.getElementById('end-time');
-
+var captionTrack = document.getElementsByTagName('track');
 var caption = document.getElementsByClassName('caption');
 
 
@@ -127,6 +128,17 @@ function showLength() {
 video.addEventListener('canplay', showLength);
 
 
+// *** CLOSED CAPTIONING BUTTON ***
+
+function toggleCaptions() {
+	if (video.textTracks[0].mode === "showing") {
+		video.textTracks[0].mode = "hidden";
+	} else if (video.textTracks[0].mode === "hidden") {
+		video.textTracks[0].mode = "showing";
+	}
+}
+
+cc.addEventListener('click', toggleCaptions);
 
 // *** FULLSCREEN BUTTON ***
 
@@ -162,19 +174,18 @@ progress.addEventListener("click", goToTime);
 
 // *** HIGHLIGHTING CAPTIONS *** 
 function highlighter() {
-	var magicPoint = video.currentTime;
 	for (var i = 0; i < caption.length; i++) {
-		if (magicPoint >= caption[i].getAttribute('data-start')
-			&& magicPoint <= caption[i].getAttribute('data-end')) {
+		if (video.currentTime >= caption[i].getAttribute('data-start')
+			&& video.currentTime <= caption[i].getAttribute('data-end')) {
 			caption[i].classList.add("highlight");
-		} else if (magicPoint >= caption[i].getAttribute('data-end')
-			|| magicPoint <= caption[i].getAttribute('data-start')) {
+		} else if (video.currentTime >= caption[i].getAttribute('data-end')
+			|| video.currentTime <= caption[i].getAttribute('data-start')) {
 			caption[i].classList.remove("highlight");
 		}
 	}; 
 }
 
-video.addEventListener("playing", setInterval(highlighter, 1000));
+video.addEventListener("playing", setInterval(highlighter, 100));
 
 
 //event listener on spans in captions

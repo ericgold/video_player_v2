@@ -16,6 +16,8 @@
 	z-index: 10;
 }
 
+
+
 #controls-buttons {
 	display: flex;
 	justify-content: space-between;
@@ -99,6 +101,18 @@ progress[value]::-webkit-progress-value {
 
 #end-time {
 	margin-right: auto;
+}
+
+#cc {
+	width: 22px;
+	height: 22px;
+	border: 2px solid white;
+	background: none;
+	outline: none;
+	color: white;
+	border-radius: 2px;
+	font-size: 0.75em;
+	padding: 1px;
 }
 
 #volume {
