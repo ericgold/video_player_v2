@@ -1,8 +1,13 @@
 var video = document.getElementById('video');
+
 //var videoControls = document.getElementById('video-controls');
 //var controlsButtons = document.getElementById('controls-buttons');
+
 var progress = document.getElementById('progress');
 var progressbar = document.getElementById('progress-bar');
+//sets default state for variable used in progress click navigation
+var timeDrag = false;
+
 var playpause = document.getElementById('playpause');
 
 var timer = document.getElementById('timer');
@@ -23,10 +28,57 @@ var caption = document.getElementsByClassName('caption');
 function progressPopulate() {
 	var videoTime = ((video.currentTime / video.duration) * 100);
 	progress.value = videoTime;
-	progressbar.innerHTML = videoTime;
+	//progressbar.innerHTML = videoTime;
 }
 
 video.addEventListener('playing', setInterval(progressPopulate, 100));
+
+
+// *** PROGRESS BAR CLICK ***
+
+function dragDown(e) {
+	timeDrag = true;
+	updateBar(e.pageX);
+}
+
+function dragUp(e) {
+	if(timeDrag) {
+		timeDrag = false;
+		updateBar(e.pageX);
+	}
+}
+
+function dragOver(e) {
+	if(timeDrag) {
+		updateBar(e.pageX);
+	}
+}
+
+function updateBar(x) {
+	var position = x - progress.offsetLeft;
+	//console.log("know " + x);
+	//console.log("progress.offsetLeft " + progress.offsetLeft);
+	//console.log("progress.offsetWidth " + progress.offsetWidth);
+	var percentage = 100 * position / progress.offsetWidth;
+	//console.log("percentage " + percentage);
+
+	if(percentage > 100) {
+		percentage = 100;
+	}
+	if(percentage < 0) {
+		percentage = 0;
+	}
+
+	progress.value = percentage;
+	video.currentTime = video.duration * percentage / 100;
+}
+
+progress.addEventListener('mousedown', dragDown);
+progress.addEventListener('mouseup', dragUp);
+progress.addEventListener('mousemove', dragOver);
+
+
+//progress.addEventListener("click", progressUpdate);
 
 
 // *** PLAYPAUSE BUTTON ***
@@ -155,7 +207,6 @@ function setVolume() {
 volumeslider.addEventListener('click', setVolume);
 
 
-
 // *** FULLSCREEN BUTTON ***
 
 function fullScreen() {
@@ -173,29 +224,21 @@ function fullScreen() {
 fullscreen.addEventListener("click", fullScreen);
 
 
-// *** PROGRESS BAR CLICK ***
-/*
-function convertPercent() {
-	var progressPercent = Math.floor(this/100);
-
-}
-
-function goToTime() {
-	var gothere = video.duration * (progressbar.value / 100);
-	video.currentTime = gothere;
-}
-
-progress.addEventListener("click", goToTime);
-*/
 
 // *** HIGHLIGHTING CAPTIONS *** 
+
 function highlighter() {
 	for (var i = 0; i < caption.length; i++) {
+		//if the video is within that caption's time range
 		if (video.currentTime >= caption[i].getAttribute('data-start')
+			//and less than data-end attr value 
 			&& video.currentTime <= caption[i].getAttribute('data-end')) {
+			//caption gets highlight class
 			caption[i].classList.add("highlight");
+			// or else if the video is not in that caption's time range
 		} else if (video.currentTime >= caption[i].getAttribute('data-end')
 			|| video.currentTime <= caption[i].getAttribute('data-start')) {
+			//caption loses highlight class
 			caption[i].classList.remove("highlight");
 		}
 	}; 
@@ -203,12 +246,6 @@ function highlighter() {
 
 video.addEventListener("playing", setInterval(highlighter, 100));
 
-
-//event listener on spans in captions
-	//if currentTime is greater than starttime 
-	//and less than end time 
-	//caption gets class
-//class should change background color of the span
 
 
 // *** CAPTION CLICK NAVIGATION ***
