@@ -4,6 +4,7 @@
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
+	padding: 0.5em;
 }
 
 #video-controls {
@@ -15,8 +16,6 @@
 	margin-top: -50px;
 	z-index: 10;
 }
-
-
 
 #controls-buttons {
 	display: flex;
@@ -37,6 +36,7 @@
 #video-controls:hover {
 	display: flex;
 }
+
 
 #captions {
 	box-sizing: border-box;
@@ -62,7 +62,7 @@
 
 #progress {
 	width: 100%;
-	flex-grow: 1;
+	/*flex-grow: 1;*/
 	height: 4px;
 	margin-bottom: 4px;
 }
@@ -74,7 +74,8 @@
 }
 
 #progress-bar {
-	height: 2px;
+	height: 100%;
+	background-color: #FFF1D6;
 }
 
 progress[value]::-webkit-progress-value {
@@ -94,18 +95,31 @@ progress[value]::-webkit-progress-value {
 #end-time {
 	height: 26px;
 	font-family: Arial, sans-serif;
-	font-size: 1.3em;
-	padding: auto;
+	font-size: 1em;
 	color: #fff;
+	align-self: center;
 }
 
 #end-time {
 	margin-right: auto;
 }
 
+label {
+	font-family: Arial, sans-serif;
+	color: #fff;
+}
+
+#playspeed[orient=vertical] {
+	-webkit-appearance: slider-vertical;
+	height: 2em;
+	width: 1em;
+	margin: 0 0.5em 0 0.25em;
+}
+
 #cc {
 	width: 22px;
 	height: 22px;
+	margin: 0 0.5em;
 	border: 2px solid white;
 	background: none;
 	outline: none;
@@ -130,4 +144,5 @@ progress[value]::-webkit-progress-value {
 	height: 22px;
 	background: url("../icons/fullscreen-icon.png");
 	border: none;
+	margin-left: 0.5em;
 }

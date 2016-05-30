@@ -28,11 +28,32 @@ var caption = document.getElementsByClassName('caption');
 function progressPopulate() {
 	var videoTime = ((video.currentTime / video.duration) * 100);
 	progress.value = videoTime;
-	//progressbar.innerHTML = videoTime;
 }
 
 video.addEventListener('playing', setInterval(progressPopulate, 100));
 
+
+// *** BUFFERING DISPLAY ***
+
+function startBuffer() {
+	var maxduration = video.duration;
+	console.log(maxduration);
+
+	var currentBuffer = video.buffered.end(0);
+	console.log(currentBuffer);
+
+	var percentage = 100 * currentBuffer / maxduration;
+	console.log(percentage);
+
+	progressbar.style.width = percentage + '%';
+	console.log(progressbar.style.width);
+
+	if(currentBuffer < maxduration) {
+		setTimeout(startBuffer, 500);
+	}
+}
+
+video.addEventListener('progress', setTimeout(startBuffer, 500));
 
 // *** PROGRESS BAR CLICK ***
 
@@ -55,13 +76,12 @@ function dragOver(e) {
 }
 
 function updateBar(x) {
+	//variable for where user put mouse
 	var position = x - progress.offsetLeft;
-	//console.log("know " + x);
-	//console.log("progress.offsetLeft " + progress.offsetLeft);
-	//console.log("progress.offsetWidth " + progress.offsetWidth);
+	//convert to percentage 
 	var percentage = 100 * position / progress.offsetWidth;
-	//console.log("percentage " + percentage);
 
+	//don't allow navigation beyond the end or before the start of video
 	if(percentage > 100) {
 		percentage = 100;
 	}
@@ -144,7 +164,7 @@ function showLength() {
 	if (totalSeconds < 10) {
 		totalSeconds = "0" + totalSeconds;
 	};
-	endTime.innerHTML = "\/" + totalMinutes + ":" + totalSeconds;
+	endTime.innerHTML = "\/ " + totalMinutes + ":" + totalSeconds;
 }
 
 video.addEventListener('canplay', showLength);
