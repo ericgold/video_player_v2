@@ -3,8 +3,9 @@ var video = document.getElementById('video');
 //var videoControls = document.getElementById('video-controls');
 //var controlsButtons = document.getElementById('controls-buttons');
 
+var buffer = document.getElementById('buffer');
 var progress = document.getElementById('progress');
-var progressbar = document.getElementById('progress-bar');
+
 //sets default state for variable used in progress click navigation
 var timeDrag = false;
 
@@ -30,30 +31,25 @@ function progressPopulate() {
 	progress.value = videoTime;
 }
 
-video.addEventListener('playing', setInterval(progressPopulate, 100));
+//timeupdate version seems irregular, but maybe uses fewer resources?
+//video.addEventListener('playing', setInterval(progressPopulate, 100));
+video.addEventListener('timeupdate', progressPopulate);
 
-
-// *** BUFFERING DISPLAY ***
+// *** BUFFER BAR ***
 
 function startBuffer() {
-	var maxduration = video.duration;
-	console.log(maxduration);
-
-	var currentBuffer = video.buffered.end(0);
-	console.log(currentBuffer);
-
-	var percentage = 100 * currentBuffer / maxduration;
-	console.log(percentage);
-
-	progressbar.style.width = percentage + '%';
-	console.log(progressbar.style.width);
-
-	if(currentBuffer < maxduration) {
+	var currentBuffer = ((video.buffered.end(0) / video.duration) * 100);
+	buffer.value = currentBuffer;
+	if(currentBuffer < video.duration) {
 		setTimeout(startBuffer, 500);
 	}
 }
 
 video.addEventListener('progress', setTimeout(startBuffer, 500));
+
+//backups to make sure startBuffer happens?
+//video.addEventListener('loadeddata', setTimeout(startBuffer, 500));
+//video.addEventListener('canplaythrough', setTimeout(startBuffer, 500));
 
 // *** PROGRESS BAR CLICK ***
 
