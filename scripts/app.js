@@ -51,7 +51,7 @@ video.addEventListener('progress', setTimeout(startBuffer, 500));
 //video.addEventListener('loadeddata', setTimeout(startBuffer, 500));
 //video.addEventListener('canplaythrough', setTimeout(startBuffer, 500));
 
-// *** PROGRESS BAR CLICK ***
+// *** PROGRESS BAR DRAG AND CLICK ***
 
 function dragDown(e) {
 	timeDrag = true;

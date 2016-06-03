@@ -1,3 +1,5 @@
+/* MAIN LAYOUT STYLES */
+
 .container {
 	display: flex;
 	flex-direction: column;
@@ -5,22 +7,6 @@
 	align-items: center;
 	box-sizing: border-box;
 	padding: 0.5em;
-}
-
-#video-controls {
-	box-sizing: border-box;
-	display: none;
-	flex-direction: column;
-	list-style: none;
-	padding: 0.5em 1em;
-	margin-top: -50px;
-	z-index: 10;
-}
-
-#controls-buttons {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 }
 
 #video,
@@ -31,12 +17,67 @@
 	max-height: 506px;
 }
 
+/* needed to get full screen in webkit browsers rather than overlay */
+#video:-webkit-full-screen {
+	width: 100%;
+	height: 100%;
+}
 
+
+/* CONTROLS LAYOUT STYLES */
+
+#video-controls {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	padding: 0.5em 1em;
+	margin-top: -15px;
+	z-index: 10;
+}
+
+#controls-buttons {
+	display: none;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/* Shows video controls on hover */
+/*
 #video:hover + #video-controls,
 #video-controls:hover {
 	display: flex;
 }
 
+
+#video:hover > #controls-buttons,
+#video-controls + #controls-buttons,
+#controls-buttons:hover {
+	display: flex;
+}
+
+*/
+
+#video:hover + #video-controls {
+	margin-top: -50px;
+}
+
+
+#video:hover + #video-controls #controls-buttons,
+#video-controls:hover #controls-buttons,
+#progress:hover + #controls-buttons,
+#controls-buttons:hover {
+	display: flex;
+}
+
+#controls-buttons:active {
+	display: flex;
+}
+
+
+
+/* TRANSCRIPT STYLES */
 
 #captions {
 	box-sizing: border-box;
@@ -48,16 +89,13 @@
 	color: orange;
 }
 
+/* script applies this style to captions as video plays */
 .highlight {
 	color: orange;
 }
 
 
-/* needed to get full screen in webkit browsers rather than overlay */
-#video:-webkit-full-screen {
-	width: 100%;
-	height: 100%;
-}
+/* PROGRESS AND BUFFER STYLES */
 
 #progress,
 #buffer {
@@ -67,12 +105,14 @@
 	margin-bottom: 4px;
 }
 
+/* moves buffer bar under progress bar */
 #buffer {
 	margin-bottom: -4px;
 }
+
+/* gives progress bar higher index than other controls */
 #progress {
 	z-index: 11;
-	
 }
 
 #progress[value],
@@ -87,7 +127,6 @@
 }
 
 #progress::-webkit-progress-value {
-	
 	background-color: orange;
 }
 
@@ -109,6 +148,8 @@
 	background-color: #FFF1D6;
 }
 */
+
+/* CONTROLS BUTTONS AND TIMER STYLES */
 
 #playpause {
 	width: 22px;
@@ -165,7 +206,6 @@ label {
 	margin: 0 0.5em;
 	outline: none;
 }
-
 
 #fullscreen {
 	width: 22px;
