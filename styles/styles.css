@@ -11,7 +11,7 @@
 
 #video,
 #captions,
-#video-controls {
+#controls-container {
 	width: 100%;
 	max-width: 900px;
 	max-height: 506px;
@@ -26,46 +26,47 @@
 
 /* CONTROLS LAYOUT STYLES */
 
-#video-controls {
+#controls-container {
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	list-style: none;
 	padding: 0.5em 1em;
-	margin-top: -15px;
 	z-index: 10;
 }
 
 #controls-buttons {
-	display: none;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 }
 
-/* Shows video controls on hover */
-/*
-#video:hover + #video-controls,
-#video-controls:hover {
+/* Classes for mousenter/leave events to show/hide controls */
+
+.hidden {
+	display: none;    /* set to none by default; show on hover */
+}
+
+.showing {
 	display: flex;
 }
 
-
-#video:hover > #controls-buttons,
-#video-controls + #controls-buttons,
-#controls-buttons:hover {
-	display: flex;
-}
-
-*/
-
-#video:hover + #video-controls {
+.raised {
 	margin-top: -50px;
 }
 
+.lowered {
+	margin-top: -15px; /* set to -50px for hover state */
+}
 
-#video:hover + #video-controls #controls-buttons,
-#video-controls:hover #controls-buttons,
+
+/*
+#video:hover + #controls-container {
+	margin-top: -50px;
+}
+
+#video:hover + #controls-container #controls-buttons,
+#controls-container:hover #controls-buttons,
 #progress:hover + #controls-buttons,
 #controls-buttons:hover {
 	display: flex;
@@ -74,7 +75,7 @@
 #controls-buttons:active {
 	display: flex;
 }
-
+*/
 
 
 /* TRANSCRIPT STYLES */

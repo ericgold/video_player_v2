@@ -1,7 +1,7 @@
 var video = document.getElementById('video');
 
-//var videoControls = document.getElementById('video-controls');
-//var controlsButtons = document.getElementById('controls-buttons');
+var controlsContainer = document.getElementById('controls-container');
+var controlsButtons = document.getElementById('controls-buttons');
 
 var buffer = document.getElementById('buffer');
 var progress = document.getElementById('progress');
@@ -19,9 +19,9 @@ var cc = document.getElementById('cc');
 var volume = document.getElementById('volume');
 var volumeslider = document.getElementById('volumeslider');
 var fullscreen = document.getElementById('fullscreen');
-
-var captionTrack = document.getElementsByTagName('track');
 var caption = document.getElementsByClassName('caption');
+
+//var captionTrack = document.getElementsByTagName('track');
 
 
 // *** PROGRESS BAR *** 
@@ -137,10 +137,10 @@ function showTimer() {
 	//tests to add leading 0 to short times
 	if (playedMinutes < 10) {
 		playedMinutes = "0" + playedMinutes;
-	};
+	}
 	if (playedSeconds < 10) {
 		playedSeconds = "0" + playedSeconds;
-	};
+	}
 	timer.innerHTML = playedMinutes + ":" + playedSeconds;
 }
 
@@ -156,10 +156,10 @@ function showLength() {
 	//tests to add leading 0 to short times
 	if (totalMinutes < 10) {
 		totalMinutes = "0" + totalMinutes;
-	};
+	}
 	if (totalSeconds < 10) {
 		totalSeconds = "0" + totalSeconds;
-	};
+	}
 	endTime.innerHTML = "\/ " + totalMinutes + ":" + totalSeconds;
 }
 
@@ -275,6 +275,30 @@ for (var i = 0; i < caption.length; i++) {
 	caption[i].addEventListener("click", captionJump);
 }
 
+// *** HIDE/SHOW CONTROLS-BUTTONS MOUSE ENTER/LEAVE *** 
+
+function showControls() {
+	controlsContainer.classList.remove("lowered");
+	controlsContainer.classList.add("raised");
+	controlsButtons.classList.remove("hidden");
+	controlsButtons.classList.add("showing");
+}
+
+function hideControls() {
+	controlsButtons.classList.remove("showing");
+	controlsButtons.classList.add("hidden");
+	controlsContainer.classList.remove("raised");
+	controlsContainer.classList.add("lowered");
+}
+
+video.addEventListener("mouseenter", showControls);
+video.addEventListener("mouseleave", hideControls);
+
+controlsContainer.addEventListener("mouseenter", showControls);
+controlsContainer.addEventListener("mouseleave", hideControls);
+
+progress.addEventListener("mouseenter", showControls);
+progress.addEventListener("mouseleave", hideControls);
 
 
 
