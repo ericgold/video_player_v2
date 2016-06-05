@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<meta lang="en">
+		<meta charset="UTF-8" lang="en">
+		<title>Video Player</title>
 		<link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/4.1.1/normalize.css">
 		<link rel="stylesheet" type="text/css" href="styles/styles.css">
 	</head>
@@ -14,8 +14,8 @@
 				<track label="captions" kind="subtitles" srclang="en" src="video/captions.vtt" default>
 			</video>
 			<div id="controls-container" class="lowered">
-				<progress id="buffer" value="0" min="0" max="100"></progress>
-				<progress id="progress" value="0" min="0" max="100"></progress>
+				<progress id="buffer" value="0" max="100"></progress>
+				<progress id="progress" value="0" max="100"></progress>
 				<div id="controls-buttons" class="hidden">
 					<button id="playpause" type="button"></button>
 					<div id="timer"></div>

@@ -1,20 +1,12 @@
 var video = document.getElementById('video');
-//var videoContainer = document.getElementById('video-container');
-
 var controlsContainer = document.getElementById('controls-container');
 var controlsButtons = document.getElementById('controls-buttons');
-
 var buffer = document.getElementById('buffer');
-var progress = document.getElementById('progress');
-
-//sets default state for variable used in progress click navigation
 var timeDrag = false;
-
+var progress = document.getElementById('progress');
 var playpause = document.getElementById('playpause');
-
 var timer = document.getElementById('timer');
 var endTime = document.getElementById('end-time');
-
 var speedLabel = document.getElementById('speed-label');
 var playspeed = document.getElementById('playspeed');
 var cc = document.getElementById('cc');
@@ -22,8 +14,6 @@ var volume = document.getElementById('volume');
 var volumeslider = document.getElementById('volumeslider');
 var fullscreen = document.getElementById('fullscreen');
 var caption = document.getElementsByClassName('caption');
-
-//var captionTrack = document.getElementsByTagName('track');
 
 
 // *** PROGRESS BAR ***
@@ -33,13 +23,11 @@ function progressPopulate() {
 	progress.value = videoTime;
 }
 
-//timeupdate version seems irregular, but maybe uses fewer resources?
-//video.addEventListener('playing', setInterval(progressPopulate, 100));
 video.addEventListener('timeupdate', progressPopulate);
 
 // *** BUFFER BAR ***
 
-function tOut(e, i) {
+function timeOut(e, i) {
 	setTimeout(e, i);
 }
 
@@ -48,14 +36,14 @@ function startBuffer() {
 	buffer.value = currentBuffer;
 }
 
-video.addEventListener('progress', tOut(startBuffer, 500));
+video.addEventListener('progress', timeOut(startBuffer, 500));
 
 //backups to make sure startBuffer happens?
 //video.addEventListener('loadeddata', setTimeout(startBuffer, 500));
 //video.addEventListener('canplaythrough', setTimeout(startBuffer, 500));
 
 
-// *** PROGRESS BAR DRAG AND CLICK ***
+// *** PROGRESS BAR DRAG AND CLICK NAVIGATION ***
 
 function dragDown(e) {
 	timeDrag = true;
@@ -73,6 +61,10 @@ function dragOver(e) {
 	if(timeDrag) {
 		updateBar(e.pageX);
 	}
+}
+
+function clickNav(e) {
+	updateBar(e.pageX);
 }
 
 function updateBar(x) {
@@ -97,8 +89,7 @@ progress.addEventListener('mousedown', dragDown);
 progress.addEventListener('mouseup', dragUp);
 progress.addEventListener('mousemove', dragOver);
 
-
-//progress.addEventListener("click", progressUpdate);
+progress.addEventListener('click', clickNav);
 
 
 // *** PLAYPAUSE BUTTON ***
@@ -129,6 +120,7 @@ function playPause() {
 }
 
 playpause.addEventListener("click", playPause);
+
 
 // *** TIMER ***
 
@@ -184,6 +176,7 @@ function setSpeed() {
 
 function showLabel() {
 	speedLabel.innerHTML = speedLabel.getAttribute("title");
+
 }
 
 function hideLabel() {
@@ -191,7 +184,6 @@ function hideLabel() {
 }
 
 playspeed.addEventListener('click', setSpeed);
-
 playspeed.addEventListener('mousedown', showLabel);
 playspeed.addEventListener('mouseup', hideLabel);
 
@@ -266,19 +258,16 @@ fullscreen.addEventListener("click", fullScreen);
 
 function highlighter() {
 	for (var i = 0; i < caption.length; i++) {
-		//if the video is within that caption's time range
-		if (video.currentTime >= caption[i].getAttribute('data-start')
-			//and less than data-end attr value 
-			&& video.currentTime <= caption[i].getAttribute('data-end')) {
+		//if the video is within that caption's time range and less than data-end attr value
+		if (video.currentTime >= caption[i].getAttribute('data-start') && video.currentTime <= caption[i].getAttribute('data-end')) {
 			//caption gets highlight class
 			caption[i].classList.add("highlight");
 			// or else if the video is not in that caption's time range
-		} else if (video.currentTime >= caption[i].getAttribute('data-end')
-			|| video.currentTime <= caption[i].getAttribute('data-start')) {
+		} else if (video.currentTime >= caption[i].getAttribute('data-end') || video.currentTime <= caption[i].getAttribute('data-start')) {
 			//caption loses highlight class
 			caption[i].classList.remove("highlight");
 		}
-	};
+	}
 }
 
 video.addEventListener("playing", counter(highlighter, 100));
@@ -322,7 +311,18 @@ progress.addEventListener("mouseenter", showControls);
 progress.addEventListener("mouseleave", hideControls);
 
 
+// *** KEYBOARD CONTROLS ***
+/*
+function keyControls(e) {
+	if (e.keyCode === 32) {
+		playPause();
+	} else if (e.keCode === 37) {
+		playspeed.value = playspeed.value + 0.5;
+		video.playbackRate = video.playbackRate + 0.5;
+	}
+}
 
-
+document.addEventListener("keyup", keyControls);
+*/
 
 
