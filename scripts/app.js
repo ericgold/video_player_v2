@@ -1,4 +1,5 @@
 var video = document.getElementById('video');
+//var videoContainer = document.getElementById('video-container');
 
 var controlsContainer = document.getElementById('controls-container');
 var controlsButtons = document.getElementById('controls-buttons');
@@ -14,6 +15,7 @@ var playpause = document.getElementById('playpause');
 var timer = document.getElementById('timer');
 var endTime = document.getElementById('end-time');
 
+var speedLabel = document.getElementById('speed-label');
 var playspeed = document.getElementById('playspeed');
 var cc = document.getElementById('cc');
 var volume = document.getElementById('volume');
@@ -24,7 +26,7 @@ var caption = document.getElementsByClassName('caption');
 //var captionTrack = document.getElementsByTagName('track');
 
 
-// *** PROGRESS BAR *** 
+// *** PROGRESS BAR ***
 
 function progressPopulate() {
 	var videoTime = ((video.currentTime / video.duration) * 100);
@@ -37,19 +39,21 @@ video.addEventListener('timeupdate', progressPopulate);
 
 // *** BUFFER BAR ***
 
+function tOut(e, i) {
+	setTimeout(e, i);
+}
+
 function startBuffer() {
 	var currentBuffer = ((video.buffered.end(0) / video.duration) * 100);
 	buffer.value = currentBuffer;
-	if(currentBuffer < video.duration) {
-		setTimeout(startBuffer, 500);
-	}
 }
 
-video.addEventListener('progress', setTimeout(startBuffer, 500));
+video.addEventListener('progress', tOut(startBuffer, 500));
 
 //backups to make sure startBuffer happens?
 //video.addEventListener('loadeddata', setTimeout(startBuffer, 500));
 //video.addEventListener('canplaythrough', setTimeout(startBuffer, 500));
+
 
 // *** PROGRESS BAR DRAG AND CLICK ***
 
@@ -131,6 +135,10 @@ playpause.addEventListener("click", playPause);
 //function on 200 ms interval, calculate mins and secs
 //and display in html element as MM:SS
 
+function counter(e, i) {
+	setInterval(e, i);
+}
+
 function showTimer() {
 	var playedMinutes = parseInt(video.currentTime / 60, 10);
 	var playedSeconds = parseInt(video.currentTime % 60);
@@ -144,7 +152,7 @@ function showTimer() {
 	timer.innerHTML = playedMinutes + ":" + playedSeconds;
 }
 
-video.addEventListener('canplay', setInterval(showTimer, 1000));
+video.addEventListener('canplay', counter(showTimer, 1000));
 
 
 
@@ -164,7 +172,9 @@ function showLength() {
 }
 
 video.addEventListener('canplay', showLength);
-
+//backup event listeners for video length display
+video.addEventListener('loadeddata', showLength);
+video.addEventListener('canplaythrough', showLength);
 
 // *** PLAYSPEED CONTROL ***
 
@@ -172,7 +182,18 @@ function setSpeed() {
 	video.playbackRate = playspeed.value;
 }
 
+function showLabel() {
+	speedLabel.innerHTML = speedLabel.getAttribute("title");
+}
+
+function hideLabel() {
+	speedLabel.innerHTML= "";
+}
+
 playspeed.addEventListener('click', setSpeed);
+
+playspeed.addEventListener('mousedown', showLabel);
+playspeed.addEventListener('mouseup', hideLabel);
 
 
 // *** CLOSED CAPTIONING BUTTON ***
@@ -257,10 +278,10 @@ function highlighter() {
 			//caption loses highlight class
 			caption[i].classList.remove("highlight");
 		}
-	}; 
+	};
 }
 
-video.addEventListener("playing", setInterval(highlighter, 100));
+video.addEventListener("playing", counter(highlighter, 100));
 
 
 

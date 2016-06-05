@@ -9,6 +9,16 @@
 	padding: 0.5em;
 }
 
+/* Styles for fullscreen solution? 
+#video-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+}
+*/
+
 #video,
 #captions,
 #controls-container {
@@ -16,6 +26,8 @@
 	max-width: 900px;
 	max-height: 506px;
 }
+
+
 
 /* needed to get full screen in webkit browsers rather than overlay */
 #video:-webkit-full-screen {
@@ -59,7 +71,7 @@
 	margin-top: -15px; /* set to -50px for hover state */
 }
 
-
+/* Styles for CSS approach to hiding and showing controls */
 /*
 #video:hover + #controls-container {
 	margin-top: -50px;
@@ -101,7 +113,6 @@
 #progress,
 #buffer {
 	width: 100%;
-	/*flex-grow: 1;*/
 	height: 4px;
 	margin-bottom: 4px;
 }
@@ -111,7 +122,7 @@
 	margin-bottom: -4px;
 }
 
-/* gives progress bar higher index than other controls */
+/* gives progress bar +1 higher index than other controls */
 #progress {
 	z-index: 11;
 }
@@ -131,6 +142,10 @@
 	background-color: orange;
 }
 
+#progress::-moz-progress-bar {
+	background-color: orange;
+}
+
 #buffer::-webkit-progress-bar {
 	background-color: white;
 }
@@ -138,6 +153,11 @@
 #buffer::-webkit-progress-value {
 	background-color: #FFF1D6;
 }
+
+#buffer::-moz-progress-bar {
+	background-color: #FFF1D6;
+}
+
 
 /*
 #progress[value]::-webkit-progress-value {
@@ -165,26 +185,17 @@
 #end-time {
 	height: 26px;
 	font-family: Arial, sans-serif;
-	font-size: 1em;
+	font-size: 0.75em;
 	color: #fff;
 	align-self: center;
+	margin-top: 12px;
 }
 
 #end-time {
 	margin-right: auto;
 }
 
-label {
-	font-family: Arial, sans-serif;
-	color: #fff;
-}
 
-#playspeed[orient=vertical] {
-	-webkit-appearance: slider-vertical;
-	height: 2em;
-	width: 1em;
-	margin: 0 0.5em 0 0.25em;
-}
 
 #cc {
 	width: 22px;
@@ -195,7 +206,7 @@ label {
 	outline: none;
 	color: white;
 	border-radius: 2px;
-	font-size: 0.75em;
+	font-size: 0.66em;
 	padding: 1px;
 }
 
@@ -214,4 +225,123 @@ label {
 	background: url("../icons/fullscreen-icon.png");
 	border: none;
 	margin-left: 0.5em;
+	outline: none;
 }
+
+/* STYLES FOR FULLSCREEN CONTROLS */
+/* HIDES DEFAULT CONTROLS WHEN FULLSCREEN
+#video::-webkit-media-controls {
+	display: none !important;
+}
+*/
+
+/* STYLES FOR INPUT RANGE ELEMENTS: VOLUMESLIDER AND PLAYSPEED; */
+
+/* Webkit range input styles */
+
+input[type=range] {
+	-webkit-appearance: none;
+}
+
+#volumeslider {
+	width: 10%;
+	max-width: 300px;
+}
+
+/* label for playspeed slider */
+label[for=playspeed] {
+	height: 1.5em;
+	width: 3em;
+	font-family: Arial, sans-serif;
+	font-size: 0.75em;
+	background: transparent;
+	color: #fff;
+	margin: 0 0.25em;
+	margin-right: -35px;
+	margin-top: -20px;
+}
+
+#playspeed {
+	/* this is double the width of the thumb, making a 
+	3-position switch: left, center, right;
+	*/
+	width: 32px;
+}
+
+
+
+input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 5px;
+	background: #ddd;
+	border: none;
+	border-radius: 3px;
+}
+
+#playspeed::-webkit-slider-runnable-track {
+	max-width: 60px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	border: none;
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+	background: orange;
+	margin-top: -4px;
+}
+
+input[type=range]:focus {
+	outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+	background: white;
+}
+
+
+
+/* Firefox range input styles */
+
+input[type=range]::-moz-range-track {
+	width: 100%;
+	height: 5px;
+	background: white;
+	border: none;
+	border-radius: 3px;
+}
+
+input[type=range]::-moz-range-thumb {
+	border: none;
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+	background: orange;
+}
+
+input[type=range]:-moz-focusring {
+	outline: none
+	
+}
+
+input[type=range]:focus::-moz-range-track {
+	background: white;
+}
+
+
+/* MEDIA QUERY */
+
+@media (min-width: 450px) {
+	#volumeslider {
+		width: 20%;
+	}
+
+	#timer,
+	#end-time {
+		font-size: 1em;
+		margin-top: 10px;
+	}
+}
+
+
