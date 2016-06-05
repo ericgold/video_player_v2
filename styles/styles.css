@@ -96,11 +96,14 @@
 	z-index: 11;
 }
 
+
 #progress[value],
 #buffer[value] {
 	-webkit-appearance: none;
+	-moz-appearance: none;
 	border: none;
 }
+
 
 #progress::-webkit-progress-bar {
 	background: transparent;
@@ -114,8 +117,9 @@
 	background-color: orange;
 }
 
+
 #buffer::-webkit-progress-bar {
-	background-color: white;
+	background-color: transparent;	
 }
 
 #buffer::-webkit-progress-value {
