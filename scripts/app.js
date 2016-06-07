@@ -180,17 +180,16 @@ function setSpeed() {
 }
 
 function showLabel() {
-	speedLabel.innerHTML = speedLabel.getAttribute("title");
-
+	speedLabel.innerHTML = speedLabel.getAttribute("data-arrows");
 }
 
 function hideLabel() {
 	speedLabel.innerHTML= "";
 }
 
-playspeed.addEventListener('click', setSpeed);
-playspeed.addEventListener('mousedown', showLabel);
-playspeed.addEventListener('mouseup', hideLabel);
+playspeed.addEventListener('change', setSpeed);
+playspeed.addEventListener('mouseenter', showLabel);
+playspeed.addEventListener('mouseleave', hideLabel);
 
 
 // *** CLOSED CAPTIONING BUTTON ***
@@ -314,6 +313,17 @@ controlsContainer.addEventListener("mouseleave", hideControls);
 
 progress.addEventListener("mouseenter", showControls);
 progress.addEventListener("mouseleave", hideControls);
+
+
+// *** RESTART VIDEO AFTER COMPLETE PLAYBACK ***
+
+function videoRestart() {
+	if (video.currentTime === video.duration) {
+		video.currentTime = 0;
+	}
+}
+
+video.addEventListener("ended", videoRestart)
 
 
 // *** KEYBOARD CONTROLS ***
