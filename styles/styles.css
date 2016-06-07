@@ -101,6 +101,7 @@
 #buffer[value] {
 	-webkit-appearance: none;
 	-moz-appearance: none;
+	/* removes default border in FF */
 	border: none;
 }
 
@@ -119,7 +120,7 @@
 
 
 #buffer::-webkit-progress-bar {
-	background-color: transparent;	
+	background-color: rgba(255, 255, 255, 0.4);	
 }
 
 #buffer::-webkit-progress-value {
