@@ -26,22 +26,27 @@ function progressPopulate() {
 video.addEventListener('timeupdate', progressPopulate);
 
 // *** BUFFER BAR ***
-
+/*
 function timeOut(e, i) {
 	setTimeout(e, i);
 }
 
 function startBuffer() {
 	var currentBuffer = ((video.buffered.end(0) / video.duration) * 100);
+	console.log(video.buffered.end(0));
+	console.log(currentBuffer);
 	buffer.value = currentBuffer;
 }
 
 video.addEventListener('progress', timeOut(startBuffer, 500));
+*/
 
-//backups to make sure startBuffer happens?
-//video.addEventListener('loadeddata', setTimeout(startBuffer, 500));
-//video.addEventListener('canplaythrough', setTimeout(startBuffer, 500));
+function bufferPopulate() {
+	var currentBuffer = ((video.buffered.end(0) / video.duration) * 100);
+	buffer.value = currentBuffer;
+}
 
+video.addEventListener('progress', bufferPopulate);
 
 // *** PROGRESS BAR DRAG AND CLICK NAVIGATION ***
 
@@ -175,17 +180,16 @@ function setSpeed() {
 }
 
 function showLabel() {
-	speedLabel.innerHTML = speedLabel.getAttribute("title");
-
+	speedLabel.innerHTML = speedLabel.getAttribute("data-arrows");
 }
 
 function hideLabel() {
 	speedLabel.innerHTML= "";
 }
 
-playspeed.addEventListener('click', setSpeed);
-playspeed.addEventListener('mousedown', showLabel);
-playspeed.addEventListener('mouseup', hideLabel);
+playspeed.addEventListener('change', setSpeed);
+playspeed.addEventListener('mouseenter', showLabel);
+playspeed.addEventListener('mouseleave', hideLabel);
 
 
 // *** CLOSED CAPTIONING BUTTON ***
@@ -309,6 +313,17 @@ controlsContainer.addEventListener("mouseleave", hideControls);
 
 progress.addEventListener("mouseenter", showControls);
 progress.addEventListener("mouseleave", hideControls);
+
+
+// *** RESTART VIDEO AFTER COMPLETE PLAYBACK ***
+
+function videoRestart() {
+	if (video.currentTime === video.duration) {
+		video.currentTime = 0;
+	}
+}
+
+video.addEventListener("ended", videoRestart)
 
 
 // *** KEYBOARD CONTROLS ***
