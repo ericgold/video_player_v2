@@ -14,8 +14,13 @@
 				<track label="captions" kind="subtitles" srclang="en" src="video/captions.vtt" default>
 			</video>
 			<div id="controls-container" class="lowered">
+				
 				<progress id="buffer" value="0" max="100"></progress>
-				<progress id="progress" value="0" max="100"></progress>
+				<div id="progress">
+					<div id="progress-bar"></div>
+				</div>
+
+				
 				<div id="controls-buttons" class="hidden">
 					<button id="playpause" type="button"></button>
 					<div id="timer"></div>

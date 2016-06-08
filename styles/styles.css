@@ -89,15 +89,23 @@
 /* moves buffer bar under progress bar */
 #buffer {
 	margin-bottom: -4px;
+	z-index: 10;
+}
+
+#progress-bar {
+	height: 100%;
+	width: 0%;
+	z-index: 12;
+	background-color: orange;
 }
 
 /* gives progress bar +1 higher index than other controls */
 #progress {
+	background: transparent; 
 	z-index: 11;
 }
 
 
-#progress[value],
 #buffer[value] {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -105,7 +113,7 @@
 	border: none;
 }
 
-
+/* Styles for progress element as buffer display 
 #progress::-webkit-progress-bar {
 	background: transparent;
 }
@@ -117,7 +125,7 @@
 #progress::-moz-progress-bar {
 	background-color: orange;
 }
-
+*/
 
 #buffer::-webkit-progress-bar {
 	background-color: rgba(255, 255, 255, 0.4);	
@@ -130,6 +138,7 @@
 #buffer::-moz-progress-bar {
 	background-color: #FFF1D6;
 }
+
 
 
 /* CONTROLS BUTTONS AND TIMER STYLES */

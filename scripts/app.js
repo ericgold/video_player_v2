@@ -2,8 +2,10 @@ var video = document.getElementById('video');
 var controlsContainer = document.getElementById('controls-container');
 var controlsButtons = document.getElementById('controls-buttons');
 var buffer = document.getElementById('buffer');
+
 var timeDrag = false;
 var progress = document.getElementById('progress');
+var progressBar = document.getElementById('progress-bar');
 var playpause = document.getElementById('playpause');
 var timer = document.getElementById('timer');
 var endTime = document.getElementById('end-time');
@@ -20,30 +22,18 @@ var caption = document.getElementsByClassName('caption');
 
 function progressPopulate() {
 	var videoTime = ((video.currentTime / video.duration) * 100);
-	progress.value = videoTime;
+	progressBar.style.width = videoTime + '%';
 }
 
 video.addEventListener('timeupdate', progressPopulate);
 
+
 // *** BUFFER BAR ***
-/*
-function timeOut(e, i) {
-	setTimeout(e, i);
-}
-
-function startBuffer() {
-	var currentBuffer = ((video.buffered.end(0) / video.duration) * 100);
-	console.log(video.buffered.end(0));
-	console.log(currentBuffer);
-	buffer.value = currentBuffer;
-}
-
-video.addEventListener('progress', timeOut(startBuffer, 500));
-*/
 
 function bufferPopulate() {
 	var currentBuffer = ((video.buffered.end(0) / video.duration) * 100);
 	buffer.value = currentBuffer;
+	console.log(currentBuffer);
 }
 
 video.addEventListener('progress', bufferPopulate);
