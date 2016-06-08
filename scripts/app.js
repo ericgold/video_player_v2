@@ -2,7 +2,6 @@ var video = document.getElementById('video');
 var controlsContainer = document.getElementById('controls-container');
 var controlsButtons = document.getElementById('controls-buttons');
 var buffer = document.getElementById('buffer');
-
 var timeDrag = false;
 var progress = document.getElementById('progress');
 var progressBar = document.getElementById('progress-bar');
